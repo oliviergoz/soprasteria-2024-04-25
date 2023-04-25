@@ -34,7 +34,7 @@ import cinema.model.Statut;
 
 public class App {
 
-
+//commentaire olivier
 	static DAOActeur daoActeur = Singleton.getInstance().getDaoActeur();
 	static DAOCompte daoCompte = Singleton.getInstance().getDaoCompte();
 	static DAOEvaluation daoEvaluation = Singleton.getInstance().getDaoEvaluation();
