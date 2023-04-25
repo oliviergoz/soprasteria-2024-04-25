@@ -32,6 +32,8 @@ import cinema.model.Seance;
 import cinema.model.Spectateur;
 import cinema.model.Statut;
 
+// Ceci est un commentaire
+
 public class App {
 
 
