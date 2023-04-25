@@ -32,7 +32,7 @@ import cinema.model.Seance;
 import cinema.model.Spectateur;
 import cinema.model.Statut;
 
-// Ceci est un commentaire
+// Ceci est un autre commentaire
 
 public class App {
 
