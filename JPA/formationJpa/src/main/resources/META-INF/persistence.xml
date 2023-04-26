@@ -19,11 +19,12 @@
 			<!--  validate=>controle -->
 			<!--  create=>drop ,create table de vos entittes -->
 			<!--  update=>controle, si il manque des choses dans la base en sont ajoutees -->
-			<property name="hibernate.hbm2ddl.auto" value="validate"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 			
 			<!-- affichage des requetes
 			ne sert a rien à part pourrir l'ecran -->
-			<property name="hibernate.show_sql" value="false"/>
+			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true"/>
 		</properties>
 	</persistence-unit>

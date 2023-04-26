@@ -24,7 +24,7 @@ public class DAOCompte  implements IDAO<Compte,Integer>{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(Singleton.getInstance().getUrlBdd(),Singleton.getInstance().getLoginBdd(),Singleton.getInstance().getPasswordBdd());
-
+			//conn.setAutoCommit(true);
 			PreparedStatement ps  = conn.prepareStatement("SELECT * from compte where id=?");
 			ps.setInt(1, id);
 			ResultSet rs  = ps.executeQuery();
