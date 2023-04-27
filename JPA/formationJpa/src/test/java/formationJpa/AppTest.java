@@ -6,19 +6,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import formationJpa.context.JpaContext;
+import formationJpa.entities.Adresse;
+import formationJpa.entities.Client;
 import formationJpa.entities.Produit;
+import formationJpa.repositories.DaoClient;
 import formationJpa.repositories.DaoProduit;
+import formationJpa.repositories.JpaContext;
 
 public class AppTest {
 	public static void main(String[] args) {
-
+		DaoClient daoClient=JpaContext.getDaoClient();
+		DaoProduit daoProduit=JpaContext.getDaoProduit();
 		Produit p1=new Produit();
-		p1.setId(1L);
 		p1.setNom("tele");
 		p1.setPrix(500);
 		
-		DaoProduit daoProduit=JpaContext.getDaoProduit();
+	
 		
 		daoProduit.insert(p1);
 		
@@ -28,6 +31,14 @@ public class AppTest {
 		
 		System.out.println(daoProduit.findAll());
 		
+		
+		Client olivier=new Client("olivier", "gozlan", new Adresse("11", "rue aaa", "11111", "paris"));
+	
+		daoClient.insert(olivier);
+		
+		Client clientEnBase=daoClient.findByKey(olivier.getId());
+		
+		System.out.println(clientEnBase.getAdresse().getRue());
 		
 		//en dernier
 		JpaContext.destroy();

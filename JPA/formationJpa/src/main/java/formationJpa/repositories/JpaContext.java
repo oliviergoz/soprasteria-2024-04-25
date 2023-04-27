@@ -1,15 +1,17 @@
-package formationJpa.context;
+package formationJpa.repositories;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import formationJpa.repositories.DaoProduit;
-import formationJpa.repositories.DaoProduitJpaImpl;
 
 public class JpaContext {
 
 	private static EntityManagerFactory entityManagerFactory=null;
 	private static DaoProduit daoProduit=new DaoProduitJpaImpl();
+	private static DaoClient daoClient=new DaoClientJpaImpl();
+	
+	public static DaoClient getDaoClient() {
+		return daoClient;
+	}
 	
 	public static DaoProduit getDaoProduit() {
 		return daoProduit;

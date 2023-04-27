@@ -7,10 +7,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import formationJpa.context.JpaContext;
 import formationJpa.entities.Produit;
 
-public class DaoProduitJpaImpl implements DaoProduit{
+ class DaoProduitJpaImpl implements DaoProduit{
 
 	@Override
 	public void insert(Produit obj) {
