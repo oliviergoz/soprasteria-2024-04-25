@@ -8,17 +8,18 @@ import javax.persistence.Persistence;
 import formationJpa.entities.Adresse;
 import formationJpa.entities.Client;
 import formationJpa.entities.Fournisseur;
+import formationJpa.entities.Personne;
 import formationJpa.entities.Produit;
 import formationJpa.repositories.DaoClient;
-import formationJpa.repositories.DaoFournisseur;
+import formationJpa.repositories.DaoPersonne;
 import formationJpa.repositories.DaoProduit;
 import formationJpa.repositories.JpaContext;
 
 public class AppTest {
 	public static void main(String[] args) {
-		DaoClient daoClient = JpaContext.getDaoClient();
+		// DaoClient daoClient=JpaContext.getDaoClient();
 		DaoProduit daoProduit = JpaContext.getDaoProduit();
-		DaoFournisseur daoFournisseur = JpaContext.getDaoFournisseur();
+		DaoPersonne daoPersonne = JpaContext.getDaoPersonne();
 		Produit p1 = new Produit();
 		p1.setNom("tele");
 		p1.setPrix(500);
@@ -32,14 +33,14 @@ public class AppTest {
 
 		Client olivier = new Client("gozlan", new Adresse("11", "rue aaa", "11111", "paris"), "olivier");
 
-		daoClient.insert(olivier);
+		daoPersonne.insert(olivier);
 
-		Client clientEnBase = daoClient.findByKey(olivier.getId());
+		Personne clientEnBase = daoPersonne.findByKey(olivier.getId());
 
 		System.out.println(clientEnBase.getAdresse().getRue());
 
-		Fournisseur f = new Fournisseur("amazon", null, "amazon");
-		daoFournisseur.insert(f);
+		Fournisseur f=new Fournisseur("amazon", null, "amazon");
+		daoPersonne.insert(f);
 
 		// en dernier
 		JpaContext.destroy();
