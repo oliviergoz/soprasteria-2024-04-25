@@ -1,5 +1,8 @@
 package formationJpa;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -7,9 +10,11 @@ import javax.persistence.Persistence;
 
 import formationJpa.entities.Adresse;
 import formationJpa.entities.Client;
+import formationJpa.entities.Commande;
 import formationJpa.entities.Fournisseur;
 import formationJpa.entities.Produit;
 import formationJpa.repositories.DaoClient;
+import formationJpa.repositories.DaoCommande;
 import formationJpa.repositories.DaoFournisseur;
 import formationJpa.repositories.DaoProduit;
 import formationJpa.repositories.JpaContext;
@@ -19,29 +24,39 @@ public class AppTest {
 		DaoClient daoClient = JpaContext.getDaoClient();
 		DaoProduit daoProduit = JpaContext.getDaoProduit();
 		DaoFournisseur daoFournisseur = JpaContext.getDaoFournisseur();
+		DaoCommande daoCommande=JpaContext.getDaoCommande();
+		
+		Fournisseur frs=new Fournisseur("amazon", null, "amazon");
+		
 		Produit p1 = new Produit();
 		p1.setNom("tele");
 		p1.setPrix(500);
+		
+		daoFournisseur.insert(frs);
 
 		daoProduit.insert(p1);
-
-		p1.setDescription("lkjlkkljlkjlk lkj lkjlk jj");
+		p1.setFournisseur(frs);
 		daoProduit.update(p1);
-
-		System.out.println(daoProduit.findAll());
-
-		Client olivier = new Client("gozlan", new Adresse("11", "rue aaa", "11111", "paris"), "olivier");
-
-		daoClient.insert(olivier);
-
-		Client clientEnBase = daoClient.findByKey(olivier.getId());
-
-		System.out.println(clientEnBase.getAdresse().getRue());
-
-		Fournisseur f = new Fournisseur("amazon", null, "amazon");
-		daoFournisseur.insert(f);
-
-		// en dernier
+		
+		
+		Produit pc=new Produit("pc", null, 500, frs);
+		daoProduit.insert(pc);
+		
+		
+		Client client=new Client("toto", null, "toto");
+		daoClient.insert(client);
+		
+		Commande commande=new Commande(client);
+		Set<Produit> produits=new HashSet<>();
+		produits.add(pc);
+		produits.add(p1);
+		commande.setProduitsCommandes(produits);
+		daoCommande.insert(commande);
+		
+		commande=daoCommande.findByKey(1L);
+		
+		
+			// en dernier
 		JpaContext.destroy();
 
 	}

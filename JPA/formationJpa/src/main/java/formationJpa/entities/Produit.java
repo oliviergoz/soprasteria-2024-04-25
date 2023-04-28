@@ -1,13 +1,19 @@
 package formationJpa.entities;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity // associe la class Produit à une table
 @Table(name = "product")
@@ -22,9 +28,22 @@ public class Produit {
 	private String description;
 	@Column(name = "price")
 	private double prix;
+	@ManyToOne
+	@JoinColumn(name="product_supplier_id",foreignKey = @ForeignKey(name="product_supplier_id_fk"))
+	private Fournisseur fournisseur;
+	@ManyToMany(mappedBy = "produitsCommandes")
+	private Set<Commande> commandesDuProduit;
 
 	public Produit() {
 
+	}
+
+	public Produit(String nom, String description, double prix, Fournisseur fournisseur) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.prix = prix;
+		this.fournisseur = fournisseur;
 	}
 
 	public Long getId() {
@@ -57,6 +76,22 @@ public class Produit {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public Fournisseur getFournisseur() {
+		return fournisseur;
+	}
+
+	public void setFournisseur(Fournisseur fournisseur) {
+		this.fournisseur = fournisseur;
+	}
+
+	public Set<Commande> getCommandesDuProduit() {
+		return commandesDuProduit;
+	}
+
+	public void setCommandesDuProduit(Set<Commande> commandesDuProduit) {
+		this.commandesDuProduit = commandesDuProduit;
 	}
 
 	@Override
