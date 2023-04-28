@@ -6,11 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import formationJpa.entities.Commande;
+import formationJpa.entities.Achat;
+import formationJpa.entities.AchatKey;
 
-public class DaoCommandeJpaImpl implements DaoCommande{
+public class DaoAchatJpaImpl implements DaoAchat{
 	@Override
-	public void insert(Commande obj) {
+	public void insert(Achat obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -20,7 +21,7 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 	}
 
 	@Override
-	public Commande update(Commande obj) {
+	public Achat update(Achat obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -31,7 +32,7 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 	}
 
 	@Override
-	public void delete(Commande obj) {
+	public void delete(Achat obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -41,29 +42,29 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 	}
 
 	@Override
-	public void deleteByKey(Long key) {
+	public void deleteByKey(AchatKey key) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(em.find(Commande.class, key));
+		em.remove(em.find(Achat.class, key));
 		tx.commit();
 		em.close();
 	}
 
 	@Override
-	public Commande findByKey(Long key) {
+	public Achat findByKey(AchatKey key) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		Commande commande = em.find(Commande.class, key);
+		Achat achat = em.find(Achat.class, key);
 		em.close();
-		return commande;
+		return achat;
 	}
 
 	@Override
-	public List<Commande> findAll() {
+	public List<Achat> findAll() {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		TypedQuery<Commande> query = em.createQuery("from Commande", Commande.class);
-		List<Commande> commandes = query.getResultList();
+		TypedQuery<Achat> query = em.createQuery("from Achat", Achat.class);
+		List<Achat> achats = query.getResultList();
 		em.close();
-		return commandes;
+		return achats;
 	}
 }

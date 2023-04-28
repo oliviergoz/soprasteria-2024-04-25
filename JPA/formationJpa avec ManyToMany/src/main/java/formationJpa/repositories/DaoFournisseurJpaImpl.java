@@ -6,11 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import formationJpa.entities.Commande;
+import formationJpa.entities.Fournisseur;
 
-public class DaoCommandeJpaImpl implements DaoCommande{
+public class DaoFournisseurJpaImpl implements DaoFournisseur {
+
 	@Override
-	public void insert(Commande obj) {
+	public void insert(Fournisseur obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -20,7 +21,7 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 	}
 
 	@Override
-	public Commande update(Commande obj) {
+	public Fournisseur update(Fournisseur obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -31,7 +32,7 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 	}
 
 	@Override
-	public void delete(Commande obj) {
+	public void delete(Fournisseur obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -45,25 +46,28 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(em.find(Commande.class, key));
+		em.remove(em.find(Fournisseur.class, key));
 		tx.commit();
 		em.close();
 	}
 
 	@Override
-	public Commande findByKey(Long key) {
+	public Fournisseur findByKey(Long key) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		Commande commande = em.find(Commande.class, key);
+		Fournisseur fournisseur = em.find(Fournisseur.class, key);
+		System.out.println("--------------------------");
+		//System.out.println(fournisseur.getProduits());
 		em.close();
-		return commande;
+		return fournisseur;
 	}
 
 	@Override
-	public List<Commande> findAll() {
+	public List<Fournisseur> findAll() {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		TypedQuery<Commande> query = em.createQuery("from Commande", Commande.class);
-		List<Commande> commandes = query.getResultList();
+		TypedQuery<Fournisseur> query = em.createQuery("from Fournisseur", Fournisseur.class);
+		List<Fournisseur> fournisseurs = query.getResultList();
 		em.close();
-		return commandes;
+		return fournisseurs;
 	}
+
 }

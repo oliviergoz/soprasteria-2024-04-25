@@ -9,13 +9,8 @@ public class JpaContext {
 	private static DaoProduit daoProduit = new DaoProduitJpaImpl();
 	private static DaoClient daoClient = new DaoClientJpaImpl();
 	private static DaoFournisseur daoFournisseur = new DaoFournisseurJpaImpl();
-	private static DaoCommande daoCommande = new DaoCommandeJpaImpl();
-	private static DaoAchat daoAchat = new DaoAchatJpaImpl();
-
-	public static DaoAchat getDaoAchat() {
-		return daoAchat;
-	}
-
+	private static DaoCommande daoCommande=new DaoCommandeJpaImpl();
+	
 	public static DaoCommande getDaoCommande() {
 		return daoCommande;
 	}

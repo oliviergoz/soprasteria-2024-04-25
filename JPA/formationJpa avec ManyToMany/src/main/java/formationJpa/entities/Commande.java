@@ -2,6 +2,7 @@ package formationJpa.entities;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,22 +11,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "shipping")
+@Table(name = "purchase")
 public class Commande {
 	@Id
-	@Column(name = "shipping_number")
+	@Column(name = "purchase_number")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
-	@Column(name = "shipping_date")
+	@Column(name = "purchase_date")
 	private LocalDate date;
 	@ManyToOne
-	@JoinColumn(name = "shipping_customer_id", foreignKey = @ForeignKey(name = "shipping_customer_id_fk"))
+	@JoinColumn(name = "purchase_customer_id", foreignKey = @ForeignKey(name = "purchase_customer_id_fk"))
 	private Client client;
-	
+	@ManyToMany
+	@JoinTable(
+			name="purchase_product",
+			joinColumns = @JoinColumn(name="purchase_product_purchase_number",foreignKey = @ForeignKey(name="purchase_product_purchase_number_fk")),
+			inverseJoinColumns = @JoinColumn(name="purchase_product_product_id",foreignKey = @ForeignKey(name="purchase_product_product_id_fk")))	
+	private Set<Produit> produitsCommandes;
 
 	public Commande() {
 
@@ -60,7 +68,13 @@ public class Commande {
 		this.client = client;
 	}
 
-	
+	public Set<Produit> getProduitsCommandes() {
+		return produitsCommandes;
+	}
+
+	public void setProduitsCommandes(Set<Produit> produitsCommandes) {
+		this.produitsCommandes = produitsCommandes;
+	}
 
 	@Override
 	public int hashCode() {

@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import formationJpa.entities.Commande;
+import formationJpa.entities.Fournisseur;
 
 public class DaoCommandeJpaImpl implements DaoCommande{
 	@Override

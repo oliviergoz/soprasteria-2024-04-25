@@ -1,17 +1,18 @@
 package formationJpa;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import formationJpa.entities.Achat;
-import formationJpa.entities.AchatKey;
+import formationJpa.entities.Adresse;
 import formationJpa.entities.Client;
 import formationJpa.entities.Commande;
 import formationJpa.entities.Fournisseur;
 import formationJpa.entities.Produit;
-import formationJpa.repositories.DaoAchat;
 import formationJpa.repositories.DaoClient;
 import formationJpa.repositories.DaoCommande;
 import formationJpa.repositories.DaoFournisseur;
@@ -24,7 +25,6 @@ public class AppTest {
 		DaoProduit daoProduit = JpaContext.getDaoProduit();
 		DaoFournisseur daoFournisseur = JpaContext.getDaoFournisseur();
 		DaoCommande daoCommande=JpaContext.getDaoCommande();
-		DaoAchat daoAchat=JpaContext.getDaoAchat();
 		
 		Fournisseur frs=new Fournisseur("amazon", null, "amazon");
 		
@@ -47,11 +47,14 @@ public class AppTest {
 		daoClient.insert(client);
 		
 		Commande commande=new Commande(client);
+		Set<Produit> produits=new HashSet<>();
+		produits.add(pc);
+		produits.add(p1);
+		commande.setProduitsCommandes(produits);
 		daoCommande.insert(commande);
 		
-		Achat achat1=new Achat(new AchatKey(commande, pc), 2);
-		daoAchat.insert(achat1);
-		daoAchat.insert(new Achat(new AchatKey(commande, p1), 5));
+		commande=daoCommande.findByKey(1L);
+		
 		
 			// en dernier
 		JpaContext.destroy();
