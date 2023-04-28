@@ -13,13 +13,13 @@
 			<!-- url -->
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/cinema"/>
 			<property name="hibernate.connection.user" value="root"/>
-			<property name="hibernate.connection.password" value="root123@"/>
+			<property name="hibernate.connection.password" value=""/>
 			
 			<!-- jpa controle la structure de la base de donnee -->
 			<!--  validate=>controle -->
 			<!--  create=>drop ,create table de vos entittes -->
 			<!--  update=>controle, si il manque des choses dans la base en sont ajoutees -->
-			<property name="hibernate.hbm2ddl.auto" value="validate"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 			
 			<!-- affichage des requetes
