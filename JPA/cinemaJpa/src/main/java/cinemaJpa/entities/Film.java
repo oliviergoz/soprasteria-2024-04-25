@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="film")
+@Table(name="Film")
 public class Film {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
