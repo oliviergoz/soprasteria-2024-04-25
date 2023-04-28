@@ -1,5 +1,8 @@
 package formationJpa;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -23,37 +26,43 @@ public class AppTest {
 		DaoClient daoClient = JpaContext.getDaoClient();
 		DaoProduit daoProduit = JpaContext.getDaoProduit();
 		DaoFournisseur daoFournisseur = JpaContext.getDaoFournisseur();
-		DaoCommande daoCommande=JpaContext.getDaoCommande();
-		DaoAchat daoAchat=JpaContext.getDaoAchat();
-		
-		Fournisseur frs=new Fournisseur("amazon", null, "amazon");
-		
+		DaoCommande daoCommande = JpaContext.getDaoCommande();
+		DaoAchat daoAchat = JpaContext.getDaoAchat();
+
+		Fournisseur frs = new Fournisseur("amazon", null, "amazon");
+
 		Produit p1 = new Produit();
 		p1.setNom("tele");
 		p1.setPrix(500);
-		
+
 		daoFournisseur.insert(frs);
 
 		daoProduit.insert(p1);
 		p1.setFournisseur(frs);
 		daoProduit.update(p1);
-		
-		
-		Produit pc=new Produit("pc", null, 500, frs);
+
+		Produit pc = new Produit("pc", null, 500, frs);
 		daoProduit.insert(pc);
-		
-		
-		Client client=new Client("toto", null, "toto");
+
+		Client client = new Client("toto", null, "toto");
 		daoClient.insert(client);
-		
-		Commande commande=new Commande(client);
+
+//		Commande commande=new Commande(client);
+//		daoCommande.insert(commande);
+//		
+//		Achat achat1=new Achat(new AchatKey(commande, pc), 2);
+//		daoAchat.insert(achat1);
+//		daoAchat.insert(new Achat(new AchatKey(commande, p1), 5));
+
+		Commande commande = new Commande(client);
+		Set<Achat> achats = Set.of(new Achat(new AchatKey(commande, pc), 2), new Achat(new AchatKey(commande, p1), 5));
+		commande.setAchats(achats);
 		daoCommande.insert(commande);
+		commande.getAchats().forEach(achat->{
+			daoAchat.insert(achat);
+		});
 		
-		Achat achat1=new Achat(new AchatKey(commande, pc), 2);
-		daoAchat.insert(achat1);
-		daoAchat.insert(new Achat(new AchatKey(commande, p1), 5));
-		
-			// en dernier
+		// en dernier
 		JpaContext.destroy();
 
 	}
