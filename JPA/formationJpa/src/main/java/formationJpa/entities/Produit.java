@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,7 +22,8 @@ public class Produit {
 	private Long id;
 	@Column(name = "name", nullable = false)
 	private String nom;
-	@Column(name = "description")
+	@Column(name = "description",columnDefinition = "TEXT")
+	@Lob
 	private String description;
 	@Column(name = "price")
 	private double prix;

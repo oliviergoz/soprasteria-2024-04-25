@@ -2,6 +2,7 @@ package formationJpa.entities;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -9,9 +10,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "purchase")
 public class Achat {
-
+	
 	@EmbeddedId
 	private AchatKey id;
+	@Column(name="quantity")
 	private int quantite;
 
 	public Achat() {

@@ -1,5 +1,6 @@
 package formationJpa;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,18 +29,21 @@ public class AppTest {
 		DaoFournisseur daoFournisseur = JpaContext.getDaoFournisseur();
 		DaoCommande daoCommande = JpaContext.getDaoCommande();
 		DaoAchat daoAchat = JpaContext.getDaoAchat();
+		System.out.println(daoClient.count());
 
 		Fournisseur frs = new Fournisseur("amazon", null, "amazon");
+		daoFournisseur.insert(frs);
 
 		Produit p1 = new Produit();
 		p1.setNom("tele");
 		p1.setPrix(500);
 
-		daoFournisseur.insert(frs);
+		frs = new Fournisseur();
+		frs.setId(1L);
+
+		p1.setFournisseur(frs);
 
 		daoProduit.insert(p1);
-		p1.setFournisseur(frs);
-		daoProduit.update(p1);
 
 		Produit pc = new Produit("pc", null, 500, frs);
 		daoProduit.insert(pc);
@@ -47,21 +51,34 @@ public class AppTest {
 		Client client = new Client("toto", null, "toto");
 		daoClient.insert(client);
 
-//		Commande commande=new Commande(client);
-//		daoCommande.insert(commande);
-//		
-//		Achat achat1=new Achat(new AchatKey(commande, pc), 2);
-//		daoAchat.insert(achat1);
-//		daoAchat.insert(new Achat(new AchatKey(commande, p1), 5));
-
 		Commande commande = new Commande(client);
+		commande.setDate(LocalDate.of(2022, 1, 1));
+		daoCommande.insert(commande);
+
+		Achat achat1 = new Achat(new AchatKey(commande, pc), 2);
+		daoAchat.insert(achat1);
+		daoAchat.insert(new Achat(new AchatKey(commande, p1), 5));
+
+		commande = new Commande(client);
 		Set<Achat> achats = Set.of(new Achat(new AchatKey(commande, pc), 2), new Achat(new AchatKey(commande, p1), 5));
 		commande.setAchats(achats);
 		daoCommande.insert(commande);
-		commande.getAchats().forEach(achat->{
+		commande.getAchats().forEach(achat -> {
 			daoAchat.insert(achat);
 		});
+
+		commande = new Commande(client);
+		achats = Set.of(new Achat(new AchatKey(commande, pc), 2), new Achat(new AchatKey(commande, p1), 5));
+		commande.setAchats(achats);
+		daoCommande.insert(commande);
+		commande.getAchats().forEach(achat -> {
+			daoAchat.insert(achat);
+		});
+
+		System.out.println(daoClient.findAllFetchCommandes());
 		
+		daoClient.deleteByKey(1L);
+
 		// en dernier
 		JpaContext.destroy();
 
