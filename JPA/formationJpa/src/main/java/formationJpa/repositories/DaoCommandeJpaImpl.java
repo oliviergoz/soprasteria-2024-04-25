@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import formationJpa.entities.Client;
 import formationJpa.entities.Commande;
 
-public class DaoCommandeJpaImpl implements DaoCommande{
+public class DaoCommandeJpaImpl implements DaoCommande {
 	@Override
 	public void insert(Commande obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
@@ -65,5 +67,29 @@ public class DaoCommandeJpaImpl implements DaoCommande{
 		List<Commande> commandes = query.getResultList();
 		em.close();
 		return commandes;
+	}
+
+	// client=>null
+	public void setClientToNullByClient(Client client) {
+		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
+		Query query = em.createQuery("update Commande c set c.client=null where c.client=:client");
+		query.setParameter("client", client);
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		query.executeUpdate();
+		tx.commit();
+		em.close();
+	}
+
+	// deleteByClient
+	public void deleteByClient(Client client) {
+		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
+		Query query = em.createQuery("delete Commande c where c.client=:client");
+		query.setParameter("client", client);
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		query.executeUpdate();
+		tx.commit();
+		em.close();
 	}
 }

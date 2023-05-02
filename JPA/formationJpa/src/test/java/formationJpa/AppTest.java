@@ -75,13 +75,24 @@ public class AppTest {
 			daoAchat.insert(achat);
 		});
 
-		System.out.println(daoClient.findAllFetchCommandes());
-		
-		daoClient.deleteByKey(1L);
-
+		deleteClientById(1L);
 		// en dernier
 		JpaContext.destroy();
 
+	}
+
+	private static void deleteClientById(Long id) {
+		Client client = JpaContext.getDaoClient().findByKeyFetchCommandes(id);
+		// daoCommande.setClientToNullByClient(client);
+//		client.getCommandes().forEach(c -> {
+//			JpaContext.getDaoAchat().deleteByCommande(c);
+//		});
+
+		client.getCommandes().forEach(JpaContext.getDaoAchat()::deleteByCommande);
+
+		JpaContext.getDaoCommande().deleteByClient(client);
+		client.setCommandes(null);
+		JpaContext.getDaoClient().delete(client);
 	}
 
 	private static void exempleEnVracAvantModeleDao() {

@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import formationJpa.entities.Achat;
 import formationJpa.entities.AchatKey;
+import formationJpa.entities.Commande;
 
-public class DaoAchatJpaImpl implements DaoAchat{
+public class DaoAchatJpaImpl implements DaoAchat {
 	@Override
 	public void insert(Achat obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
@@ -66,5 +68,16 @@ public class DaoAchatJpaImpl implements DaoAchat{
 		List<Achat> achats = query.getResultList();
 		em.close();
 		return achats;
+	}
+
+	public void deleteByCommande(Commande commande) {
+		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
+		Query query = em.createQuery("delete Achat a where a.id.commande=:commande");
+		query.setParameter("commande", commande);
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		query.executeUpdate();
+		tx.commit();
+		em.close();
 	}
 }
