@@ -11,13 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="Compte")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING,length = 1)
 
+@MappedSuperclass
 public class Compte {
 	
 	@Id

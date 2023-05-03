@@ -6,12 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import cinemaJpa.entities.Acteur;
+import cinemaJpa.entities.Evaluation;
+import cinemaJpa.entities.EvaluationKey;
 
-public class DaoActeurJpaImpl implements DaoActeur {
-
+public class DaoEvaluationJpaImpl implements DaoEvaluation {
 	@Override
-	public void insert(Acteur obj) {
+	public void insert(Evaluation obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -25,23 +25,23 @@ public class DaoActeurJpaImpl implements DaoActeur {
 	}
 
 	@Override
-	public Acteur update(Acteur obj) {
+	public Evaluation update(Evaluation obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		Acteur acteur = null;
+		Evaluation evaluation = null;
 		tx.begin();
 		try {
-			acteur = em.merge(obj);
+			evaluation = em.merge(obj);
 			tx.commit();
 		} catch (Exception ex) {
 			tx.rollback();
 		}
 		em.close();
-		return acteur;
+		return evaluation;
 	}
 
 	@Override
-	public void delete(Acteur obj) {
+	public void delete(Evaluation obj) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -55,12 +55,12 @@ public class DaoActeurJpaImpl implements DaoActeur {
 	}
 
 	@Override
-	public void deleteByKey(Long key) {
+	public void deleteByKey(EvaluationKey key) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-			em.remove(em.find(Acteur.class, key));
+			em.remove(em.find(Evaluation.class, key));
 			tx.commit();
 		} catch (Exception ex) {
 			tx.rollback();
@@ -69,30 +69,19 @@ public class DaoActeurJpaImpl implements DaoActeur {
 	}
 
 	@Override
-	public Acteur findByKey(Long key) {
+	public Evaluation findByKey(EvaluationKey key) {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		Acteur acteur = em.find(Acteur.class, key);
+		Evaluation evaluation = em.find(Evaluation.class, key);
 		em.close();
-		return acteur;
+		return evaluation;
 	}
 
 	@Override
-	public List<Acteur> findAll() {
+	public List<Evaluation> findAll() {
 		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		TypedQuery<Acteur> query = em.createQuery("from Acteur", Acteur.class);
-		List<Acteur> acteurs = query.getResultList();
+		TypedQuery<Evaluation> query = em.createQuery("from Evaluation", Evaluation.class);
+		List<Evaluation> evaluations = query.getResultList();
 		em.close();
-		return acteurs;
+		return evaluations;
 	}
-
-	@Override
-	public Acteur findByIdFetchFilms(Long id) {
-		EntityManager em = JpaContext.getEntityManagerFactory().createEntityManager();
-		TypedQuery<Acteur> query = em.createQuery("from Acteur a left join fetch a.films where a.id=:id", Acteur.class);
-		query.setParameter("id", id);
-		Acteur acteur = query.getSingleResult();
-		em.close();
-		return acteur;
-	}
-
 }

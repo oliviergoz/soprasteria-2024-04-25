@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,6 @@ import javax.transaction.Transactional;
 @Entity
 @Table(name = "Seance")
 public class Seance {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "seance_id")
@@ -29,10 +29,10 @@ public class Seance {
 	@Column(name = "seance_prix")
 	private double prix;
 	@ManyToOne
-	@JoinColumn(name = "film_id")
-    private Film film;
+	@JoinColumn(name = "seance_film_id")
+	private Film film;
 	@ManyToOne
-	@JoinColumn(name = "Salle_id")
+	@JoinColumn(name = "seance_salle_id", foreignKey = @ForeignKey(name = "seance_salle_id_fk"))
 	private Salle salle;
 	@Column(name = "seance_langue")
 	private Langue langue;
