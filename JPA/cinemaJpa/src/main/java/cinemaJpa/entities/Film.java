@@ -37,7 +37,7 @@ public class Film {
 	private LocalDate sortie;
 	@Column(name = "film_dispo")
 	private boolean disponible;
-	@OneToMany(mappedBy = "film")
+	@OneToMany(mappedBy = "flm")
 	private Set<Seance> seances;
 	@ManyToMany
 	@JoinTable(name = "participation", joinColumns = @JoinColumn(name = "participation_film_id", foreignKey = @ForeignKey(name = "participation_film_id_fk")), inverseJoinColumns = @JoinColumn(name = "participation_acteur_id", foreignKey = @ForeignKey(name = "participation_acteur_id_fk")))

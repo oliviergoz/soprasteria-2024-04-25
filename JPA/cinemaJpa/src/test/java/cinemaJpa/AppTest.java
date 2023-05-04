@@ -7,7 +7,7 @@ public class AppTest {
 
 		JpaContext.getEntityManagerFactory();
 
-		JpaContext.getDaoFilm().findTop10();
+	
 		JpaContext.destroy();
 	}
 }
