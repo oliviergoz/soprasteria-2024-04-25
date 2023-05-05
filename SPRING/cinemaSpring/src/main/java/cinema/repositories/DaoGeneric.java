@@ -1,4 +1,4 @@
-package eshop.repositories;
+package cinema.repositories;
 
 import java.util.List;
 

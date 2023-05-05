@@ -1,15 +1,17 @@
-package eshop.configurations;
+package cinema.configurations;
 
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -17,17 +19,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement  //pour la gestion des transactions
-//@ComponentScan("eshop.repositories")
-@EnableJpaRepositories("eshop.repositories")
+@ComponentScan("eshop.repositories")
+@PropertySource("classpath:config.properties")
 public class JpaConfig {
 
+	@Autowired
+	private Environment env;
+	
 	@Bean
 	public BasicDataSource dataSource() {
 		BasicDataSource dataSource=new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/eshop");
-		dataSource.setUsername("root");
-		dataSource.setPassword("root123@");
+		dataSource.setUrl(env.getProperty("datasource.url"));
+		dataSource.setUsername(env.getProperty("datasource.username"));
+		dataSource.setPassword(env.getProperty("datasource.password"));
 		return dataSource;
 	}
 	
