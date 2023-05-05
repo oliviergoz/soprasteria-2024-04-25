@@ -3,6 +3,7 @@ package musicien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import musicien.beans.Guitariste;
 import musicien.beans.Musicien;
 
 public class AppSpring {

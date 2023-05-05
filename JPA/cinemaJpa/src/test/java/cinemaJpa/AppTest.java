@@ -7,7 +7,7 @@ public class AppTest {
 
 		JpaContext.getEntityManagerFactory();
 
-	
+		
 		JpaContext.destroy();
 	}
 }

@@ -2,46 +2,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>formation.soprasteria</groupId>
-	<artifactId>musicienV3</artifactId>
+	<artifactId>junit</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<aspectj.version>1.9.19</aspectj.version>
-		<spring.version>5.3.27</spring.version>
 	</properties>
 	<dependencies>
-		<dependency>
-  		  <groupId>org.springframework</groupId>
-  	      <artifactId>spring-context</artifactId>
-  		  <version>${spring.version}</version>
-		</dependency>
-		<dependency>
-  			<groupId>org.aspectj</groupId>
-    		<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.aspectj</groupId>
-		    <artifactId>aspectjrt</artifactId>
-		    <version>${aspectj.version}</version>
-		    <scope>runtime</scope>
-		</dependency>
 		<dependency>
     		<groupId>org.junit.jupiter</groupId>
     		<artifactId>junit-jupiter-api</artifactId>
     		<version>5.9.2</version>
     		<scope>test</scope>
 		</dependency>
-		<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-test</artifactId>
-    <version>${spring.version}</version>
-    <scope>test</scope>
-</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>
