@@ -1,5 +1,7 @@
 package eshop.repositories;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +21,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Transactional
 	@Modifying
 	void deleteByClient(Client client);
+
+	@Query("select c from Commande c left join fetch c.achats where c.numero=:numero")
+	Optional<Commande> findByIdFetchAchats(@Param("numero") Long numero);
 }
