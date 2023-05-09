@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "supplier")
 @AttributeOverride(name = "id", column = @Column(name = "supplier_id"))
-@AttributeOverride(name = "nom", column = @Column(name = "supplier_name"))
+@AttributeOverride(name = "nom", column = @Column(name = "supplier_name",nullable = false))
 @AttributeOverride(name = "adresse.numero", column = @Column(name = "supplier_number", length = 50))
 @AttributeOverride(name = "adresse.rue", column = @Column(name = "supplier_street"))
 @AttributeOverride(name = "adresse.codePostal", column = @Column(name = "supplier_zip_code", length = 50))

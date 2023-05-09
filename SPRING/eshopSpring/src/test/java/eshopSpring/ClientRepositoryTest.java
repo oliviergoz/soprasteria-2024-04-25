@@ -1,6 +1,7 @@
 package eshopSpring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
@@ -18,9 +19,10 @@ class ClientRepositoryTest {
 	@Autowired
 	ClientRepository clientRepo;
 
+
 	@Test
 	void test() {
-		Client client = new Client("zzz", null, "zzz");
+		Client client = new Client(null, null, "zzz");
 
 		clientRepo.save(client);
 		assertNotNull(client.getId());

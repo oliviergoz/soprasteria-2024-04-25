@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement  //pour la gestion des transactions
-//@ComponentScan("eshop.repositories")
+@ComponentScan("eshop.services")
 @EnableJpaRepositories("eshop.repositories")
 public class JpaConfig {
 
@@ -38,7 +38,7 @@ public class JpaConfig {
 		emf.setPackagesToScan("eshop.entities");
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		Properties properties=new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.hbm2ddl.auto", "validate");
 		properties.setProperty("hibernate.format_sql","true");
 		properties.setProperty("hibernate.show_sql", "false");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
@@ -57,4 +57,5 @@ public class JpaConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+
 }
