@@ -14,7 +14,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import eshop.entities.Fournisseur;
 import eshop.entities.Produit;
 import eshop.services.FournisseurService;
-import eshop.services.ProduitService;
+
 
 /**
  * Servlet implementation class FournisseurController
@@ -23,7 +23,7 @@ import eshop.services.ProduitService;
 public class ProduitController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ProduitService produitSrv = null;
+	private eshop.services.ProduitService produitSrv = null;
 	private AnnotationConfigApplicationContext ctx = null;
 	private FournisseurService fournisseurSrv = null;
 
@@ -38,7 +38,7 @@ public class ProduitController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		ctx = (AnnotationConfigApplicationContext) this.getServletContext().getAttribute("springCtx");
-		produitSrv = ctx.getBean(ProduitService.class);
+		produitSrv = ctx.getBean(eshop.services.ProduitService.class);
 		fournisseurSrv = ctx.getBean(FournisseurService.class);
 	}
 

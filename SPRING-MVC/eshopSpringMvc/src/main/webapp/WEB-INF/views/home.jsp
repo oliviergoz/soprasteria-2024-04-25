@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>hello ${prenom}</h1>
+	<h1>bienvenue sur notre eshop</h1>
 </body>
 </html>

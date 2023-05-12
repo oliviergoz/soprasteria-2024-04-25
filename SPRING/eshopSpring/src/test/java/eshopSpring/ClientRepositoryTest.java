@@ -22,7 +22,7 @@ class ClientRepositoryTest {
 
 	@Test
 	void test() {
-		Client client = new Client(null, null, "zzz");
+		Client client = new Client("aaa", null, "zzz");
 
 		clientRepo.save(client);
 		assertNotNull(client.getId());
