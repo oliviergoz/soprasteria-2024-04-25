@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<base href="${pageContext.request.contextPath }/">	
+<base href="${pageContext.request.contextPath }/">
 </head>
 <body>
 	<div class="container">
@@ -28,13 +28,30 @@
 					id="nom" value="${produit.nom }">
 			</div>
 			<div class="form-group">
-				<label for="description">description:</label> <input class="form-control"
-					name="description" id="description" value="${produit.description }">
+				<label for="description">description:</label>
+				<textarea name="description" rows="10" class="form-control">${produit.description }</textarea>
 			</div>
 			<div class="form-group">
-				<label for="prix">prix:</label> <input class="form-control" name="prix"
-					id="prix" value="${produit.prix }">
-			</div>						
+				<label for="prix">prix:</label> <input type="number" step="0.01"
+					class="form-control" name="prix" id="prix" value="${produit.prix }">
+			</div>
+			<div class="form-group">
+				<label for="fournisseur.id">fournisseur:</label> <select
+					name="fournisseur.id" id="fourisseur.id" class="form-control">
+					<c:forEach var="f" items="${fournisseurs}">
+						<c:choose>
+							<c:when test="${produit.fournisseur.id==f.id }">
+								<option value="${f.id}" selected="selected">nom:${f.nom},
+									contact:${f.contact}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${f.id}">nom:${f.nom},
+									contact:${f.contact}</option>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</select>
+			</div>
 			<div>
 				<button type="submit" class="btn btn-primary">enregistrer</button>
 				<a href="produit" class="btn btn-link">annuler</a>

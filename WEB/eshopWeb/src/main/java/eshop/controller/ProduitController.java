@@ -13,7 +13,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import eshop.entities.Fournisseur;
 import eshop.entities.Produit;
-import eshop.services.ProduitService;/**
+import eshop.services.FournisseurService;
+import eshop.services.ProduitService;
+
+/**
  * Servlet implementation class FournisseurController
  */
 @WebServlet("/produit")
@@ -22,6 +25,7 @@ public class ProduitController extends HttpServlet {
 
 	private ProduitService produitSrv = null;
 	private AnnotationConfigApplicationContext ctx = null;
+	private FournisseurService fournisseurSrv = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -35,6 +39,7 @@ public class ProduitController extends HttpServlet {
 	public void init() throws ServletException {
 		ctx = (AnnotationConfigApplicationContext) this.getServletContext().getAttribute("springCtx");
 		produitSrv = ctx.getBean(ProduitService.class);
+		fournisseurSrv = ctx.getBean(FournisseurService.class);
 	}
 
 	/**
@@ -92,20 +97,23 @@ public class ProduitController extends HttpServlet {
 	private Produit getProduit(HttpServletRequest request) {
 		String nom = request.getParameter("nom");
 		String description = request.getParameter("description");
-		double prix = Double.parseDouble("prix");
-		Fournisseur fournisseur = null;	
+		double prix = Double.parseDouble(request.getParameter("prix"));
+		Fournisseur fournisseur = null;
 		Produit produit = new Produit(nom, description, prix, fournisseur);
-		
+
 		if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
 			Long id = null;
 			id = Long.parseLong(request.getParameter("id"));
 			produit.setId(id);
 		}
+		if (request.getParameter("fournisseur.id") != null && !request.getParameter("fournisseur.id").isEmpty()) {
+			produit.setFournisseur(fournisseurSrv.getById(Long.parseLong(request.getParameter("fournisseur.id"))));
+		}
 		return produit;
 	}
 
 	private RequestDispatcher list(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("produit", produitSrv.getAll());
+		request.setAttribute("produits", produitSrv.getAll());
 		return request.getRequestDispatcher("/WEB-INF/produit/list.jsp");
 	}
 
@@ -117,18 +125,19 @@ public class ProduitController extends HttpServlet {
 
 	private RequestDispatcher update(HttpServletRequest request, HttpServletResponse response) {
 		Long id = Long.parseLong(request.getParameter("id"));
-		request.setAttribute("fournisseur", produitSrv.getById(id));
+		request.setAttribute("produit", produitSrv.getById(id));
 		request.setAttribute("action", "update");
 		return goForm(request, response);
 	}
 
 	private RequestDispatcher create(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("fournisseur", new Produit());
+		request.setAttribute("produit", new Produit());
 		request.setAttribute("action", "create");
 		return goForm(request, response);
 	}
 
 	private RequestDispatcher goForm(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("fournisseurs", fournisseurSrv.getAll());
 		return request.getRequestDispatcher("/WEB-INF/produit/edit.jsp");
 	}
 

@@ -46,7 +46,7 @@
 					<td>${p.nom}</td>
 					<td>${p.description }</td>
 					<td>${p.prix}</td>
-					<td>${p.fournisseur}</td>
+					<td>${p.fournisseur.nom}</td>
 					<td><a href="produit?q=update&id=${p.id}"
 						class="btn btn-primary">editer</a></td>
 					<td><a href="produit?q=delete&id=${p.id}"
