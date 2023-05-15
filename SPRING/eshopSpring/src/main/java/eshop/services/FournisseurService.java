@@ -1,6 +1,10 @@
 package eshop.services;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,17 +24,31 @@ public class FournisseurService {
 	private FournisseurRepository fournisseurRepo;
 	@Autowired
 	private ProduitRepository produitRepo;
+	@Autowired
+	private Validator validator;
 
 	private void checkFournisseur(Fournisseur fournisseur) {
 		if (fournisseur == null) {
 			throw new FournisseurException("fournisseur null");
 		}
-		if (fournisseur.getNom() == null || fournisseur.getNom().isEmpty()) {
-			throw new FournisseurException("nom obligatoire");
+//		if (fournisseur.getNom() == null || fournisseur.getNom().isEmpty()) {
+//			throw new FournisseurException("nom obligatoire");
+//		}
+//		if (fournisseur.getContact() == null || fournisseur.getContact().isEmpty()) {
+//			throw new FournisseurException("contact obligatoire");
+//		}
+
+		Set<ConstraintViolation<Fournisseur>> violations = validator.validate(fournisseur);
+		if (!violations.isEmpty()) {
+			if (violations.iterator().next().getPropertyPath().toString().equals("nom")) {
+				throw new FournisseurException("nom obligatoire");
+			}
+			if (violations.iterator().next().getPropertyPath().toString().equals("contact")) {
+				throw new FournisseurException("conctact obligatoire");
+			}
+			// throw new FournisseurException();
 		}
-		if (fournisseur.getContact() == null || fournisseur.getContact().isEmpty()) {
-			throw new FournisseurException("contact obligatoire");
-		}
+
 	}
 
 	private void checkId(Long id) {

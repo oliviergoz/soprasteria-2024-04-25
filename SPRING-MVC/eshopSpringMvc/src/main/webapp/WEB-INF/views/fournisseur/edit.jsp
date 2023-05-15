@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,50 +12,50 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<base href="${pageContext.request.contextPath }/">	
+<base href="${pageContext.request.contextPath }/">
 </head>
 <body>
 	<div class="container">
 		<h1>edition fournisseur</h1>
-		<form action="fournisseur/save" method="post">
+		<form:form action="fournisseur/save" method="post" modelAttribute="fournisseur">
 			<div class="form-group">
-				<label for="id">id:</label> <input class="form-control" name="id"
-					id="id" readonly="readonly" placeholder="génération automatique"
-					value="${fournisseur.id}">
+				<form:label path="id">id:</form:label>
+				<form:input path="id" class="form-control" readonly="true" placeholder="numero automatique"/>
 			</div>
 			<div class="form-group">
-				<label for="nom">nom:</label> <input class="form-control" name="nom"
-					id="nom" value="${fournisseur.nom }">
+				<form:label path="nom">nom:</form:label>
+				<form:input path="nom" class="form-control"/>
+				<form:errors path="nom">
+					<div class="alert alert-danger">mon message d'erreur</div>
+				</form:errors>
 			</div>
 			<div class="form-group">
-				<label for="contact">contact:</label> <input class="form-control"
-					name="contact" id="contact" value="${fournisseur.contact }">
+				<form:label path="contact">contact:</form:label>
+				<form:input path="contact" class="form-control"/>
+				<form:errors path="contact"></form:errors>
 			</div>
 			<div class="form-group">
-				<label for="adresse.numero">numero:</label> <input
-					class="form-control" name="adresse.numero" id="adresse.numero"
-					value="${fournisseur.adresse.numero }">
+				<form:label path="adresse.numero">numero:</form:label>
+				<form:input path="adresse.numero" class="form-control"/>
 			</div>
 			<div class="form-group">
-				<label for="adresse.rue">rue:</label> <input class="form-control"
-					name="adresse.rue" id="adresse.rue"
-					value="${fournisseur.adresse.rue }">
+				<form:label path="adresse.rue">rue:</form:label>
+				<form:input path="adresse.rue" class="form-control"/>
 			</div>
 			<div class="form-group">
-				<label for="adresse.codePostal">code postal:</label> <input
-					class="form-control" name="adresse.codePostal"
-					id="adresse.codePostal" value="${fournisseur.adresse.codePostal }">
+				<form:label path="adresse.codePostal">code postal:</form:label>
+				<form:input path="adresse.codePostal" class="form-control"/>
 			</div>
 			<div class="form-group">
-				<label for="adresse.ville">ville:</label> <input
-					class="form-control" name="adresse.ville" id="adresse.ville"
-					value="${fournisseur.adresse.ville }">
+				<form:label path="adresse.ville">ville:</form:label>
+				<form:input path="adresse.ville" class="form-control"/>
+				<form:errors path="adresse.ville"></form:errors>
 			</div>
 			<div>
 				<button type="submit" class="btn btn-primary">enregistrer</button>
 				<a href="fournisseur" class="btn btn-link">annuler</a>
 			</div>
-		</form>
+		</form:form>
 	</div>
 </body>
 </html>

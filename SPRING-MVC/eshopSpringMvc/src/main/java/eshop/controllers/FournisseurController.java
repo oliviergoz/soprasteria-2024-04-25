@@ -1,8 +1,11 @@
 package eshop.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +22,7 @@ public class FournisseurController {
 	@Autowired
 	private FournisseurService fournisseurSrv;
 
-	@GetMapping("/list")
+	@GetMapping({ "", "/list" })
 	public String list(Model model) {
 		model.addAttribute("fournisseurs", fournisseurSrv.getAll());
 		return "fournisseur/list";
@@ -28,28 +31,30 @@ public class FournisseurController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam(name = "id") Long id, Model model) {
 		fournisseurSrv.delete(id);
-		model.addAttribute("delete",id );
+		model.addAttribute("delete", id);
 		return "redirect:/fournisseur/list";
 	}
 
 	@GetMapping("/edit")
 	public String update(@RequestParam("id") Long id, Model model) {
-		model.addAttribute("fournisseur", fournisseurSrv.getById(id));
-		return goForm(model);
+		return goForm(fournisseurSrv.getById(id), model);
 	}
 
 	@GetMapping("/add")
 	public String add(Model model) {
-		model.addAttribute("fournisseur", new Fournisseur());
-		return goForm(model);
+		return goForm(new Fournisseur(), model);
 	}
 
-	private String goForm(Model model) {
+	private String goForm(Fournisseur fournisseur, Model model) {
+		model.addAttribute("fournisseur", fournisseur);
 		return "fournisseur/edit";
 	}
 
 	@PostMapping("/save")
-	public String save(@ModelAttribute Fournisseur fournisseur, Model model) {
+	public String save(@Valid @ModelAttribute Fournisseur fournisseur,BindingResult br, Model model) {
+		if(br.hasErrors()) {
+			return goForm(fournisseur,model);
+		}
 		if (fournisseur.getId() == null) {
 			fournisseur = fournisseurSrv.create(fournisseur);
 			model.addAttribute("create", fournisseur.getId() );

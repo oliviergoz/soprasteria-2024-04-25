@@ -2,19 +2,27 @@ package eshop.entities;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class Personne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	//@NotNull
+	@NotBlank(message = "*ne doit pas etre vide")
+	@Column(name="nom",nullable = false)
 	private String nom;
 	@Embedded
+	@Valid
 	private Adresse adresse;
 
 	public Personne() {

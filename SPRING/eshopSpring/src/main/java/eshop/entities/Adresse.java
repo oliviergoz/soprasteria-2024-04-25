@@ -3,12 +3,14 @@ package eshop.entities;
 import java.util.Objects;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
 
 @Embeddable
 public class Adresse {
 	private String numero;
 	private String rue;
 	private String codePostal;
+	@NotBlank
 	private String ville;
 
 	public Adresse() {
@@ -72,7 +74,5 @@ public class Adresse {
 		return Objects.equals(codePostal, other.codePostal) && Objects.equals(numero, other.numero)
 				&& Objects.equals(rue, other.rue) && Objects.equals(ville, other.ville);
 	}
-	
-	
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "supplier")
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 public class Fournisseur extends Personne {
 
 	@Column(name = "supplier_contact")
+	@NotBlank
 	private String contact;
 	@OneToMany(mappedBy = "fournisseur")
 	private Set<Produit> produits;
