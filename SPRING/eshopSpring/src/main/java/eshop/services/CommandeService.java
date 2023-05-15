@@ -76,7 +76,9 @@ public class CommandeService {
 
 	public Commande create(Commande commande) {
 		checkClient(commande.getClient());
-		return commandeRepo.save(commande);
+		commandeRepo.save(commande);
+		achatRepo.saveAll(commande.getAchats());
+		return commande;
 	}
 
 	public Commande create(Client client, Map<Produit, Integer> panier) {
