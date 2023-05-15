@@ -49,5 +49,8 @@ public class Fournisseur extends Personne {
 	public void setProduits(Set<Produit> produits) {
 		this.produits = produits;
 	}
-
+	
+	public String getInfos() {
+		return "nom:"+getNom()+", contact:"+getContact();
+	}
 }

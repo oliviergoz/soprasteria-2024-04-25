@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 
 @Entity // associe la class Produit à une table
 @Table(name = "product")
@@ -21,11 +23,13 @@ public class Produit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "name", nullable = false)
+	@NotBlank
 	private String nom;
 	@Column(name = "description",columnDefinition = "TEXT")
 	@Lob
 	private String description;
 	@Column(name = "price")
+	@DecimalMin(value = "0.01",message="*prix minimum:0.01")
 	private double prix;
 	@ManyToOne
 	@JoinColumn(name="product_supplier_id",foreignKey = @ForeignKey(name="product_supplier_id_fk"))
