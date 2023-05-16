@@ -15,14 +15,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Entity
 @Table(name = "shipping")
 public class Commande {
 	@Id
 	@Column(name = "shipping_number")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(JsonViews.Base.class)
 	private Long numero;
 	@Column(name = "shipping_date")
+	@JsonView(JsonViews.Base.class)
 	private LocalDate date;
 	@ManyToOne
 	@JoinColumn(name = "shipping_customer_id", foreignKey = @ForeignKey(name = "shipping_customer_id_fk"))

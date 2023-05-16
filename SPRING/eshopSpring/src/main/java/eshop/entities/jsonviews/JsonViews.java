@@ -20,5 +20,17 @@ public class JsonViews {
 	public class ProduitWithFournisseur extends Produit {
 
 	}
+	
+	public class Client extends Base{
+		
+	}
+	
+	public class ClientWithCommandes extends Client{
+		
+	}
+	
+	public class Commande extends Base{
+		
+	}
 
 }

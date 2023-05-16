@@ -9,6 +9,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Entity
 @Table(name = "customer")
 @AttributeOverride(name = "id", column = @Column(name = "customer_id"))
@@ -20,8 +24,10 @@ import javax.validation.constraints.NotBlank;
 public class Client extends Personne {
 	@Column(name = "customer_first_name")
 	@NotBlank
+	@JsonView(JsonViews.Base.class)
 	private String prenom;
 	@OneToMany(mappedBy = "client")
+	@JsonView(JsonViews.ClientWithCommandes.class)
 	private Set<Commande> commandes;
 
 	public Client() {
