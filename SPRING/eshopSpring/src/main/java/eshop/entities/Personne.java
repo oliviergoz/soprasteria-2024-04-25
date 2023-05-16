@@ -10,19 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
 
 @MappedSuperclass
 public abstract class Personne {
+	@JsonView(JsonViews.Base.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	//@NotNull
 	@NotBlank(message = "*ne doit pas etre vide")
 	@Column(name="nom",nullable = false)
+	@JsonView(JsonViews.Base.class)
 	private String nom;
 	@Embedded
 	@Valid
+	@JsonView(JsonViews.Base.class)
 	private Adresse adresse;
 
 	public Personne() {

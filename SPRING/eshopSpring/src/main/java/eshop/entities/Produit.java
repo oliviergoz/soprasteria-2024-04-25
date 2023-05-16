@@ -15,24 +15,33 @@ import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Entity // associe la class Produit à une table
 @Table(name = "product")
 public class Produit {
 	@Id
 	@Column(name = "product_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(JsonViews.Base.class)
 	private Long id;
 	@Column(name = "name", nullable = false)
 	@NotBlank
+	@JsonView(JsonViews.Base.class)
 	private String nom;
 	@Column(name = "description",columnDefinition = "TEXT")
 	@Lob
+	@JsonView(JsonViews.Base.class)
 	private String description;
 	@Column(name = "price")
 	@DecimalMin(value = "0.01",message="*prix minimum:0.01")
+	@JsonView(JsonViews.Base.class)
 	private double prix;
 	@ManyToOne
 	@JoinColumn(name="product_supplier_id",foreignKey = @ForeignKey(name="product_supplier_id_fk"))
+	@JsonView(JsonViews.ProduitWithFournisseur.class)
 	private Fournisseur fournisseur;
 
 	public Produit() {

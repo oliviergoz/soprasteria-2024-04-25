@@ -9,6 +9,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Entity
 @Table(name = "supplier")
 @AttributeOverride(name = "id", column = @Column(name = "supplier_id"))
@@ -18,11 +22,12 @@ import javax.validation.constraints.NotBlank;
 @AttributeOverride(name = "adresse.codePostal", column = @Column(name = "supplier_zip_code", length = 50))
 @AttributeOverride(name = "adresse.ville", column = @Column(name = "supplier_city"))
 public class Fournisseur extends Personne {
-
+	@JsonView(JsonViews.Base.class)
 	@Column(name = "supplier_contact")
 	@NotBlank
 	private String contact;
 	@OneToMany(mappedBy = "fournisseur")
+	@JsonView(JsonViews.FournisseurWithProduits.class)
 	private Set<Produit> produits;
 
 	public Fournisseur() {

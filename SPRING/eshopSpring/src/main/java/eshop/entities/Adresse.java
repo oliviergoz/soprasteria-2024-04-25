@@ -5,12 +5,20 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Embeddable
 public class Adresse {
+	@JsonView(JsonViews.Base.class)
 	private String numero;
+	@JsonView(JsonViews.Base.class)
 	private String rue;
+	@JsonView(JsonViews.Base.class)
 	private String codePostal;
 	@NotBlank
+	@JsonView(JsonViews.Base.class)
 	private String ville;
 
 	public Adresse() {
