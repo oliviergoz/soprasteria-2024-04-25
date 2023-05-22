@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import eshop.entities.Client;
 import eshop.entities.Commande;
 import eshop.entities.Produit;
+import eshop.entities.jsonviews.JsonViews;
 import eshop.model.ElementPanier;
 import eshop.services.ClientService;
 import eshop.services.CommandeService;
@@ -32,6 +34,7 @@ public class CommandeRestController {
 	private ProduitService produitSrv;
 
 	@PostMapping("/{idClient}")
+	@JsonView(JsonViews.Commande.class)
 	public Commande create(@PathVariable("idClient") Long idClient, @RequestBody List<ElementPanier> elements) {
 		Client client = clientSrv.getById(idClient);
 //		Map<Produit,Integer > panier=new HashMap<>();

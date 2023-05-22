@@ -1,0 +1,7 @@
+2023-05-22T11:19:35.090+02:00  INFO 2523 --- [main] s.formation.springBoot.Application       : Starting Application using Java 17.0.1 with PID 2523 (/Users/olivier/Documents/soprasteria.20230425.nosync/soprasteria-2024-04-25/SPRING-BOOT/springBoot/target/classes started by olivier in /Users/olivier/Documents/soprasteria.20230425.nosync/soprasteria-2024-04-25/SPRING-BOOT/springBoot)
+2023-05-22T11:19:35.092+02:00  INFO 2523 --- [main] s.formation.springBoot.Application       : The following 1 profile is active: "dev"
+2023-05-22T11:19:35.268+02:00  INFO 2523 --- [main] s.formation.springBoot.Application       : Started Application in 0.323 seconds (process running for 0.552)
+2023-05-22T11:19:35.269+02:00 DEBUG 2523 --- [main] s.f.springBoot.services.ConsoleService   : debug
+2023-05-22T11:19:35.269+02:00  INFO 2523 --- [main] s.f.springBoot.services.ConsoleService   : info
+2023-05-22T11:19:35.269+02:00  WARN 2523 --- [main] s.f.springBoot.services.ConsoleService   : warn
+2023-05-22T11:19:35.269+02:00 ERROR 2523 --- [main] s.f.springBoot.services.ConsoleService   : error
