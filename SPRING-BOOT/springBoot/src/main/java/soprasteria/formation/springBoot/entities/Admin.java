@@ -12,5 +12,10 @@ public class Admin extends Compte {
 		super(id, login, password, email);
 
 	}
+	
+	public Admin(String login, String password, String email) {
+		super(login, password, email);
+
+	}
 
 }
