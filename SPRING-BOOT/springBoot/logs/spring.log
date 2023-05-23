@@ -687,3 +687,9 @@ Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: E
 2023-05-23 11:13:56.639  INFO 1927 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/demo]   : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-05-23 11:13:56.640  INFO 1927 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-05-23 11:13:56.641  INFO 1927 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-23 14:06:39.563  INFO 1927 --- [RMI TCP Connection(182)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-23 14:06:39.567  INFO 1927 --- [RMI TCP Connection(182)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-05-23 14:06:39.568  INFO 1927 --- [RMI TCP Connection(182)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/demo]   : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-23 14:06:39.575  INFO 1927 --- [RMI TCP Connection(182)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 14:06:39.576  INFO 1927 --- [RMI TCP Connection(182)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-23 14:06:39.580  INFO 1927 --- [RMI TCP Connection(182)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
