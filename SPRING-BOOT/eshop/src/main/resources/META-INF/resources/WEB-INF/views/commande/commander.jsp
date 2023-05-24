@@ -32,7 +32,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<c:if test="${!panier.isEmpty() }"> <a href="commande/client" class="btn btn-link">valider commande</a></c:if>
+		<c:if test="${!panier.isEmpty() }"> <a href="commande/save" class="btn btn-link">valider commande</a></c:if>
 	</div>
 
 </body>

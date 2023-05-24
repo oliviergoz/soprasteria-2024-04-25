@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import soprasteria.formation.eshop.entities.Client;
+import soprasteria.formation.eshop.entities.Compte;
 import soprasteria.formation.eshop.entities.Produit;
 import soprasteria.formation.eshop.services.ClientService;
 import soprasteria.formation.eshop.services.CommandeService;
@@ -66,17 +68,10 @@ public class CommandeController {
 		return "redirect:/commande/commander";
 	}
 
-	@GetMapping("/client")
-	public String clients(Model model) {
-		model.addAttribute("clients", clientSrv.getAll());
-		return "commande/client";
-	}
-
-	@PostMapping("/save")
-	public String save(@RequestParam("id") Long idClient, HttpSession session, Model model) {
+	@GetMapping("/save")
+	public String save(@AuthenticationPrincipal Compte compte, HttpSession session, Model model) {
 		Map<Produit, Integer> panier = (Map<Produit, Integer>) session.getAttribute("panier");
-		Client client = clientSrv.getById(idClient);
-		model.addAttribute("commande", commandeSrv.create(client, panier));
+		model.addAttribute("commande", commandeSrv.create(compte.getClient(), panier));
 		session.invalidate();
 		return "commande/confirm";
 	}
