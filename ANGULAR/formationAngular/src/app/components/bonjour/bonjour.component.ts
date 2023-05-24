@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Personne } from 'src/app/models/personne';
 
 @Component({
@@ -6,16 +6,20 @@ import { Personne } from 'src/app/models/personne';
   templateUrl: './bonjour.component.html',
   styleUrls: ['./bonjour.component.css'],
 })
-export class BonjourComponent {
-  prenom: string = 'jordan';
-  nom = 'abid';
+export class BonjourComponent implements OnInit {
+  // @Input()
+  // prenom!: string;
+  // @Input()
+  // nom!: string;
+  // @Input('photo')
+  // picture!: string;
+
+  @Input()
   personne!: Personne;
 
-  constructor() {
-    this.initPersonne();
-  }
+  constructor() {}
 
-  initPersonne() {
-    this.personne = new Personne('John', 'Doe');
+  ngOnInit(): void {
+    //garanti le traitement des inputs
   }
 }

@@ -1,0 +1,16 @@
+<div style="background-color: red">
+  <h2>component form-personne</h2>
+  <table>
+    <tr>
+      <td>prenom:</td>
+      <td><input [(ngModel)]="personne.prenom" /></td>
+    </tr>
+    <tr>
+      <td>nom:</td>
+      <td><input [(ngModel)]="personne.nom" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><button (click)="envoyer()">envoyer</button></td>
+    </tr>
+  </table>
+</div>

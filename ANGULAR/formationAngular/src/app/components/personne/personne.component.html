@@ -1,0 +1,8 @@
+<div style="background-color: yellow">
+  <h2>component personne</h2>
+  <app-form-personne
+    (personnePrete)="recuperationPersonne($event)"
+  ></app-form-personne>
+  <app-bonjour [personne]="personneAEnvoyer"></app-bonjour>
+  <h2>fin component personne</h2>
+</div>
