@@ -8,6 +8,8 @@ import { ProduitComponent } from './components/produit/produit.component';
 import { PersonneComponent } from './components/personne/personne.component';
 import { FormsModule } from '@angular/forms';
 import { FormPersonneComponent } from './components/form-personne/form-personne.component';
+import { FormProduitComponent } from './components/form-produit/form-produit.component';
+import { DisplayProduitComponent } from './components/display-produit/display-produit.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { FormPersonneComponent } from './components/form-personne/form-personne.
     ProduitComponent,
     PersonneComponent,
     FormPersonneComponent,
+    FormProduitComponent,
+    DisplayProduitComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],

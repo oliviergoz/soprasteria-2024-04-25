@@ -1,1 +1,2 @@
-<p>produit:{{ produit.nom }}, prix:{{ produit.prix }}</p>
+<app-form-produit (produitReady)="getProduit($event)"></app-form-produit>
+<app-display-produit [produit]="produit"></app-display-produit>
