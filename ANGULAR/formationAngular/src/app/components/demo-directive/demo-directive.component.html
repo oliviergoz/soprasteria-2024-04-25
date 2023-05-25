@@ -1,0 +1,7 @@
+<div>une div avec la condition</div>
+<p *ngIf="display(); else etiquetteBaliseAAfficherSiFaux">p if vrai</p>
+<div>une div apres la condition</div>
+
+<ng-template #etiquetteBaliseAAfficherSiFaux>
+  <p>p if false</p>
+</ng-template>

@@ -12,6 +12,7 @@ import { FormProduitComponent } from './components/form-produit/form-produit.com
 import { DisplayProduitComponent } from './components/display-produit/display-produit.component';
 import { MatiereComponent } from './components/sondage/matiere/matiere.component';
 import { MatierePrefereeComponent } from './components/sondage/matiere-preferee/matiere-preferee.component';
+import { DemoDirectiveComponent } from './components/demo-directive/demo-directive.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatierePrefereeComponent } from './components/sondage/matiere-preferee/
     DisplayProduitComponent,
     MatiereComponent,
     MatierePrefereeComponent,
+    DemoDirectiveComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],
