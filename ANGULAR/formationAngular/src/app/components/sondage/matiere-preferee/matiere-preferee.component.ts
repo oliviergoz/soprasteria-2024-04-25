@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class MatierePrefereeComponent {
   matierePreferee = '';
   vote = 0;
+  matieres = ['java', 'uml', 'javascript', 'angular'];
 
   getVote(obj: any) {
     if (obj.vote > this.vote) {

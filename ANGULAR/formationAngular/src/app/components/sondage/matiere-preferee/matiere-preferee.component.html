@@ -2,7 +2,5 @@
   matiere preferee:{{ matierePreferee }} avec {{ vote }} votes
 </p>
 <app-matiere nom="java" (voteEmitter)="getVote($event)"></app-matiere>
-<app-matiere nom="uml" (voteEmitter)="getVote($event)"></app-matiere>
-<app-matiere nom="angular" (voteEmitter)="getVote($event)"></app-matiere>
 
 <ng-template #pasDeVote><p>pas de vote</p></ng-template>
