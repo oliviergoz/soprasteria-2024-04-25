@@ -5,3 +5,14 @@
 <ng-template #etiquetteBaliseAAfficherSiFaux>
   <p>p if false</p>
 </ng-template>
+
+<ul>
+  <li *ngFor="let texte of tabString">{{ texte }}</li>
+</ul>
+
+<table>
+  <tr *ngFor="let produit of tabProduit">
+    <td>{{ produit.nom }}</td>
+    <td>{{ produit.prix }}</td>
+  </tr>
+</table>
