@@ -7,10 +7,12 @@ import { Personne } from 'src/app/models/personne';
   styleUrls: ['./personne.component.css'],
 })
 export class PersonneComponent {
-  personneAEnvoyer = new Personne();
-  personnes: Personne[] = [];
+  personnes: Personne[] = [
+    new Personne('olivier', 'gozlan'),
+    new Personne('jordan', 'abid'),
+  ];
 
   recuperationPersonne(personne: Personne) {
-    this.personneAEnvoyer = personne;
+    this.personnes.push(personne);
   }
 }

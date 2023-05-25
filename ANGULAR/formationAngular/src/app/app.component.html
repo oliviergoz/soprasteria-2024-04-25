@@ -1,2 +1,9 @@
 <h1>formation angular</h1>
-<app-personne></app-personne>
+<nav>
+  <a routerLink="/personne" routerLinkActive="active">personne</a>
+  <a routerLink="/sondage" routerLinkActive="active">sondage</a>
+  <a routerLink="/produit" routerLinkActive="active">produit</a>
+  <a routerLink="/produit/tele">detail tele</a>
+  <a routerLink="/produit/ordinateur">detail ordinateur</a>
+</nav>
+<router-outlet></router-outlet>

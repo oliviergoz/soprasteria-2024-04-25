@@ -1,6 +1,17 @@
-<p *ngIf="matierePreferee; else pasDeVote">
+<p *ngIf="matierePreferee; else pasDeVote" background couleur="pink">
   matiere preferee:{{ matierePreferee }} avec {{ vote }} votes
 </p>
-<app-matiere nom="java" (voteEmitter)="getVote($event)"></app-matiere>
+<app-matiere
+  *ngFor="let matiere of matieres"
+  [nom]="matiere"
+  (voteEmitter)="getVote($event)"
+></app-matiere>
 
+<div background couleur="green">
+  nouvelle matiere:<input [(ngModel)]="matiereAAjouter" /><button
+    (click)="ajoutMatiere()"
+  >
+    ajouter matiere
+  </button>
+</div>
 <ng-template #pasDeVote><p>pas de vote</p></ng-template>
