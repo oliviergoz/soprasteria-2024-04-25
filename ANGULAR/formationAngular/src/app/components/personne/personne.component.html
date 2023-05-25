@@ -1,8 +1,13 @@
-<div style="background-color: yellow">
+<div background couleur="yellow">
   <h2>component personne</h2>
   <app-form-personne
     (personnePrete)="recuperationPersonne($event)"
   ></app-form-personne>
-  <table></table>
+  <table>
+    <tr *ngFor="let p of personnes">
+      <td>{{ p.prenom }}</td>
+      <td>{{ p.nom }}</td>
+    </tr>
+  </table>
   <h2>fin component personne</h2>
 </div>
