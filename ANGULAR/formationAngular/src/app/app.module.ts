@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { FormPersonneComponent } from './components/form-personne/form-personne.component';
 import { FormProduitComponent } from './components/form-produit/form-produit.component';
 import { DisplayProduitComponent } from './components/display-produit/display-produit.component';
+import { MatiereComponent } from './components/sondage/matiere/matiere.component';
+import { MatierePrefereeComponent } from './components/sondage/matiere-preferee/matiere-preferee.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { DisplayProduitComponent } from './components/display-produit/display-pr
     FormPersonneComponent,
     FormProduitComponent,
     DisplayProduitComponent,
+    MatiereComponent,
+    MatierePrefereeComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],
