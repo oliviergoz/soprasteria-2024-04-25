@@ -16,12 +16,17 @@ import { DemoDirectiveComponent } from './components/demo-directive/demo-directi
 import { BackgroundDirective } from './directives/background.directive';
 import { RouterModule, Routes } from '@angular/router';
 import { ProduitDetailComponent } from './components/produit-detail/produit-detail.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'sondage', component: MatierePrefereeComponent },
   { path: 'produit', component: ProduitComponent },
   { path: 'produit/:id', component: ProduitDetailComponent },
   { path: 'personne', component: PersonneComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -38,6 +43,8 @@ const routes: Routes = [
     MatierePrefereeComponent,
     DemoDirectiveComponent,
     BackgroundDirective,
+    NotFoundComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [],
