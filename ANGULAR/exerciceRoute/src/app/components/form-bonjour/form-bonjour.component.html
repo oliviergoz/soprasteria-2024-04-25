@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label>votre nom:</label><input [(ngModel)]="nom" /><span *ngIf="erreur"
+    >*obligatoire</span
+  >
+  <button class="btn btn-primary" (click)="envoyer()">envoyer</button>
+</div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Personne } from 'src/app/models/personne';
+import { DemoService } from 'src/app/services/demo.service';
 
 @Component({
   selector: 'app-personne',
@@ -7,10 +8,11 @@ import { Personne } from 'src/app/models/personne';
   styleUrls: ['./personne.component.css'],
 })
 export class PersonneComponent {
-  personnes: Personne[] = [
-    new Personne('olivier', 'gozlan'),
-    new Personne('jordan', 'abid'),
-  ];
+  personnes: Personne[];
+
+  constructor(private demoSrv: DemoService) {
+    this.personnes = demoSrv.getPersonnes();
+  }
 
   recuperationPersonne(personne: Personne) {
     this.personnes.push(personne);
