@@ -1,0 +1,62 @@
+<h1>edition produit</h1>
+<div>
+  <div class="form-group">
+    <label for="id">id:</label>
+    <input
+      id="id"
+      class="form-control"
+      [(ngModel)]="produit.id"
+      readonly
+      placeholder="numero auto"
+    />
+  </div>
+  <div class="form-group">
+    <label for="nom">nom:</label>
+    <input id="nom" class="form-control" [(ngModel)]="produit.nom" />
+  </div>
+  <div class="form-group">
+    <label for="nom">description:</label>
+    <textarea
+      id="description"
+      class="form-control"
+      [(ngModel)]="produit.description"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="prix">prix:</label>
+    <input
+      type="number"
+      step="0.01"
+      id="prix"
+      class="form-control"
+      [(ngModel)]="produit.prix"
+    />
+  </div>
+  <div class="form-group">
+    <label for="fournisseur">fournisseur</label>
+    <select
+      class="form-control"
+      id="fournisseur"
+      [(ngModel)]="produit.fournisseur"
+      [compareWith]="compareById"
+    >
+      <option
+        [ngValue]="fournisseur"
+        *ngFor="let fournisseur of obsFournisseurs | async"
+      >
+        {{ fournisseur.nom }} {{ fournisseur.contact }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button (click)="save()" class="btn btn-outline-primary">
+      enregistrer
+    </button>
+    <a
+      routerLink="/produit"
+      routerLinkActive="active"
+      class="btn btn-outline-warning"
+      >annuler</a
+    >
+  </div>
+</div>

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +27,13 @@ import soprasteria.formation.eshop.services.ProduitService;
 
 @RestController
 @RequestMapping("/api/produit")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProduitRestController {
 	@Autowired
 	private ProduitService produitSrv;
 	
 	@GetMapping("")
-	@JsonView(JsonViews.Produit.class)
+	@JsonView(JsonViews.ProduitWithFournisseur.class)
 	public List<Produit> getAll() {
 		return produitSrv.getAll();
 	}

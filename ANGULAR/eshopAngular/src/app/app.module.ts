@@ -8,6 +8,8 @@ import { FournisseurEditComponent } from './components/fournisseur/fournisseur-e
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
+import { ProduitListComponent } from './components/produit/produit-list/produit-list.component';
+import { ProduitEditComponent } from './components/produit/produit-edit/produit-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     FournisseurEditComponent,
     MenuComponent,
     HomeComponent,
+    ProduitListComponent,
+    ProduitEditComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
