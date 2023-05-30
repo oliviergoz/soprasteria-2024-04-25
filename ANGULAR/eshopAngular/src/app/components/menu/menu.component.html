@@ -6,4 +6,15 @@
   <a routerLink="/produit" routerLinkActive="active" class="btn btn-link"
     >produit</a
   >
+  <a
+    *ngIf="!login"
+    routerLink="/login"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >login</a
+  >
+  <button *ngIf="login" (click)="logoff()" class="btn btn-link">
+    deconnexion
+  </button>
+  <span *ngIf="login">bonjour {{ login }}</span>
 </nav>

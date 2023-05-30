@@ -1,0 +1,24 @@
+<div *ngIf="displayError" class="alert alert-danger">
+  informations incorrectes
+</div>
+<div>
+  <div class="form-group">
+    <label for="login">login:</label>
+    <input id="login" [(ngModel)]="login" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="password">mot de passe:</label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="password"
+      class="form-control"
+    />
+  </div>
+  <div>
+    <button (click)="check()" class="btn btn-outline-primary">envoyer</button
+    ><a routerLink="/home" routerLinkActive="active" class="btn btn-link"
+      >retour home</a
+    >
+  </div>
+</div>

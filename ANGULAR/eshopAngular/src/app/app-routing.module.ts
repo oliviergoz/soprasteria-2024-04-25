@@ -5,6 +5,7 @@ import { FournisseurEditComponent } from './components/fournisseur/fournisseur-e
 import { HomeComponent } from './components/home/home.component';
 import { ProduitListComponent } from './components/produit/produit-list/produit-list.component';
 import { ProduitEditComponent } from './components/produit/produit-edit/produit-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: 'fournisseur', component: FournisseurListComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'produit', component: ProduitListComponent },
   { path: 'produit/edit', component: ProduitEditComponent },
   { path: 'produit/edit/:id', component: ProduitEditComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

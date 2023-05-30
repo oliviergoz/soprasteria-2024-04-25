@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FournisseurListComponent } from './components/fournisseur/fournisseur-list/fournisseur-list.component';
@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ProduitListComponent } from './components/produit/produit-list/produit-list.component';
 import { ProduitEditComponent } from './components/produit/produit-edit/produit-edit.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,16 @@ import { ProduitEditComponent } from './components/produit/produit-edit/produit-
     HomeComponent,
     ProduitListComponent,
     ProduitEditComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
