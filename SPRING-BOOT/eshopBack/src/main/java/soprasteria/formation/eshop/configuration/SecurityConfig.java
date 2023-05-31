@@ -37,6 +37,7 @@ public class SecurityConfig {
 						.and()
 						.authorizeRequests()
 							.antMatchers(HttpMethod.OPTIONS).permitAll()
+							.antMatchers(HttpMethod.GET,"/api/client/login/**").permitAll()
 							.antMatchers(HttpMethod.POST,"/api/client/inscription").anonymous()
 							.antMatchers(HttpMethod.GET,"/api/auth").authenticated()
 							.antMatchers("/api/commande").hasRole("CLIENT")

@@ -8,4 +8,6 @@ import soprasteria.formation.eshop.entities.Compte;
 
 public interface CompteRepository extends JpaRepository<Compte, Long> {
 	Optional<Compte> findByLogin(String login);
+
+	boolean existsByLogin(String login);
 }

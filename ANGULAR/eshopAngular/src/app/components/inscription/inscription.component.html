@@ -4,26 +4,48 @@
     <label for="login">login:</label>
     <input id="login" class="form-control" formControlName="login" />
     <div *ngIf="form.get('login')?.dirty && form.get('login')?.invalid">
-      login obligatoire*
+      <span *ngIf="form.get('login')?.hasError('required')"
+        >*login obligatoire</span
+      >
+      <span *ngIf="form.get('login')?.hasError('loginExist')"
+        >*login deja utilisé</span
+      >
     </div>
   </div>
-  <div class="form-group">
-    <label for="password">mot de passe:</label>
-    <input
-      id="password"
-      type="password"
-      class="form-control"
-      formControlName="password"
-    />
-    <div *ngIf="form.get('password')?.dirty && form.get('password')?.invalid">
-      <span *ngIf="form.get('password')?.hasError('required')">
-        *mot de passe obligatoire
-      </span>
-      <span *ngIf="form.get('password')?.hasError('pattern')">
-        *doit contenir majuscule, minuscule, chiffre et caracteres speciaux
-      </span>
+  <ng-container formGroupName="passwordGrp">
+    <div class="form-group">
+      <label for="password">mot de passe:</label>
+      <input
+        id="password"
+        type="password"
+        class="form-control"
+        formControlName="password"
+      />
+      <div
+        *ngIf="
+          form.get('passwordGrp.password')?.dirty &&
+          form.get('passwordGrp.password')?.invalid
+        "
+      >
+        <span *ngIf="form.get('passwordGrp.password')?.hasError('required')">
+          *mot de passe obligatoire
+        </span>
+        <span *ngIf="form.get('passwordGrp.password')?.hasError('pattern')">
+          *doit contenir majuscule, minuscule, chiffre et caracteres speciaux
+        </span>
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="confirmPassword">confirmation du mot de passe:</label>
+      <input
+        id="confirmPassword"
+        type="confirmPassword"
+        class="form-control"
+        formControlName="confirmPassword"
+      />
+    </div>
+  </ng-container>
+
   <div class="form-group">
     <label for="prenom">prenom:</label>
     <input id="prenom" class="form-control" formControlName="prenom" />
@@ -63,7 +85,9 @@
       class="btn btn-outline-primary"
       [disabled]="form.invalid"
     >
-      envoyer
-    </button>
+      envoyer</button
+    ><a routerLink="/home" routerLinkActive="active" class="btn btn-link"
+      >annuler</a
+    >
   </div>
 </form>

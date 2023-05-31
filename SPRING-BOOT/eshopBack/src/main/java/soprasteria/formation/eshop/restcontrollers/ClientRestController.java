@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import soprasteria.formation.eshop.entities.Client;
 import soprasteria.formation.eshop.entities.jsonviews.JsonViews;
 import soprasteria.formation.eshop.services.ClientService;
+import soprasteria.formation.eshop.services.CompteService;
 
 @RestController
 @RequestMapping("/api/client")
@@ -32,6 +33,13 @@ public class ClientRestController {
 
 	@Autowired
 	private ClientService clientSrv;
+	@Autowired
+	private CompteService compteSrv;
+
+	@GetMapping("/login/{login}")
+	public boolean loginExist(@PathVariable String login){
+		return compteSrv.loginExist(login);
+	}
 
 	@GetMapping("")
 	@JsonView(JsonViews.Client.class)

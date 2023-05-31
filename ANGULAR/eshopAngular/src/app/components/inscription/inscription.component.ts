@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
+import { CustomValidator } from 'src/app/validators/custom-validator';
 
 @Component({
   selector: 'app-inscription',
@@ -15,21 +24,51 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{4,}$/
-        ),
-      ]),
-      corfirmPassword: new FormControl(),
+      login: new FormControl(
+        '',
+        [
+          Validators.required,
+          CustomValidator.pasToto,
+          CustomValidator.pasChaineDefinieParLUtilisateur('tutu'),
+        ],
+        this.loginLibre()
+      ),
+      passwordGrp: new FormGroup(
+        {
+          password: new FormControl('', [
+            Validators.required,
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{4,}$/
+            ),
+          ]),
+          confirmPassword: new FormControl(),
+        },
+        this.controlsEgaux
+      ),
       prenom: new FormControl('', Validators.required),
       nom: new FormControl('', Validators.required),
       numero: new FormControl(),
       rue: new FormControl(),
       codePostal: new FormControl(),
-      ville: new FormControl(),
+      ville: new FormControl('', Validators.required),
     });
+  }
+
+  loginLibre(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.clientSrv.loginExist(control.value).pipe(
+        map((resultat: boolean) => {
+          return resultat ? { loginExist: true } : null;
+        })
+      );
+    };
+  }
+
+  controlsEgaux(control: AbstractControl): ValidationErrors | null {
+    return control.get('password')?.value ==
+      control.get('confirmPassword')?.value
+      ? null
+      : { pasEgaux: true };
   }
 
   submit() {
@@ -44,7 +83,7 @@ export class InscriptionComponent implements OnInit {
       },
       compte: {
         login: this.form.get('login')?.value,
-        password: this.form.get('password')?.value,
+        password: this.form.get('passwordGrp.password')?.value,
       },
     };
     this.clientSrv.inscription(client).subscribe((client) => {

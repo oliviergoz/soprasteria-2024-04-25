@@ -13,4 +13,8 @@ export class ClientService {
   public inscription(client: any): Observable<any> {
     return this.httpClient.post(`${ClientService.URL}/inscription`, client);
   }
+
+  public loginExist(login: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${ClientService.URL}/login/${login}`);
+  }
 }
