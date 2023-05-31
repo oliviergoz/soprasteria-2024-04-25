@@ -99,7 +99,8 @@ public class FournisseurService {
 
 	public Page<Fournisseur> getPage(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		return getPage(pageable);
+		Page<Fournisseur> maPage=fournisseurRepo.findAll(pageable);
+		return ;
 	}
 
 	public Page<Fournisseur> getPage(Pageable pageable) {

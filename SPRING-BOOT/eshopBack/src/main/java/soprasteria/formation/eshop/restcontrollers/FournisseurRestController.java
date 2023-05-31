@@ -73,5 +73,11 @@ public class FournisseurRestController {
 	public void delete(@PathVariable Long id) {
 		fournisseurSrv.delete(id);
 	}
+
+	@GetMapping("/page/{page}/{size}")
+	@JsonView(JsonViews.Fournisseur.class)
+	public List<Fournisseur> getPage(@PathVariable int page, @PathVariable int size) {
+		return fournisseurSrv.getPage(page, size).getContent();
+	}
 	
 }

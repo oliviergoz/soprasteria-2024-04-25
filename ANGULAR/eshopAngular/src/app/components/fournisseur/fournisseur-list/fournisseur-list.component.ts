@@ -8,9 +8,18 @@ import { FournisseurService } from 'src/app/services/fournisseur.service';
   styleUrls: ['./fournisseur-list.component.css'],
 })
 export class FournisseurListComponent implements OnInit {
-  fournisseurs!: Fournisseur[];
+  fournisseurs: Fournisseur[] = [];
+  filtre = '';
 
   constructor(private fournisseurSrv: FournisseurService) {}
+
+  fournisseurFiltre() {
+    return this.fournisseurs.filter(
+      (f) =>
+        f.nom?.indexOf(this.filtre) != -1 ||
+        f.contact?.indexOf(this.filtre) != -1
+    );
+  }
 
   ngOnInit(): void {
     this.listFournisseurs();
