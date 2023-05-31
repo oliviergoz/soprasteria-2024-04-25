@@ -1,11 +1,5 @@
 <nav>
   <a routerLink="/home" routerLinkActive="active" class="btn btn-link">home</a>
-  <a routerLink="/fournisseur" routerLinkActive="active" class="btn btn-link"
-    >fournisseur</a
-  >
-  <a routerLink="/produit" routerLinkActive="active" class="btn btn-link"
-    >produit</a
-  >
   <a
     *ngIf="!login"
     routerLink="/login"
@@ -13,8 +7,29 @@
     class="btn btn-link"
     >login</a
   >
-  <button *ngIf="login" (click)="logoff()" class="btn btn-link">
-    deconnexion
-  </button>
-  <span *ngIf="login">bonjour {{ login }}</span>
+  <ng-container *ngIf="login">
+    <a
+      *ngIf="admin"
+      routerLink="/fournisseur"
+      routerLinkActive="active"
+      class="btn btn-link"
+      >fournisseur</a
+    >
+    <a
+      *ngIf="admin"
+      routerLink="/produit"
+      routerLinkActive="active"
+      class="btn btn-link"
+      >produit</a
+    >
+    <a
+      *ngIf="client"
+      routerLink="/commander"
+      routerLinkActive="active"
+      class="btn btn-link"
+      >commander</a
+    >
+    <button (click)="logoff()" class="btn btn-link">deconnexion</button>
+    <span>bonjour {{ login }}</span>
+  </ng-container>
 </nav>

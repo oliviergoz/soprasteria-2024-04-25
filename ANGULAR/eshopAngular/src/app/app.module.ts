@@ -12,6 +12,7 @@ import { ProduitListComponent } from './components/produit/produit-list/produit-
 import { ProduitEditComponent } from './components/produit/produit-edit/produit-edit.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
+import { ProduitDispoComponent } from './components/commande/produit-dispo/produit-dispo.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
     ProduitListComponent,
     ProduitEditComponent,
     LoginComponent,
+    ProduitDispoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
