@@ -11,6 +11,7 @@ import { LoggedGuardService } from './services/guard/logged-guard.service';
 import { LoggoffGuardService } from './services/guard/loggoff-guard.service';
 import { ProduitDispoComponent } from './components/commande/produit-dispo/produit-dispo.component';
 import { ClientGuardService } from './services/guard/client-guard.service';
+import { InscriptionComponent } from './components/inscription/inscription.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
     path: 'commander',
     component: ProduitDispoComponent,
     canActivate: [ClientGuardService],
+  },
+  {
+    path: 'inscription',
+    component: InscriptionComponent,
+    canActivate: [LoggoffGuardService],
   },
   {
     path: 'login',

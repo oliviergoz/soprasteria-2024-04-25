@@ -7,6 +7,13 @@
     class="btn btn-link"
     >login</a
   >
+  <a
+    *ngIf="!login"
+    routerLink="/inscription"
+    routerLinkActive="active"
+    class="btn btn-link"
+    >inscription</a
+  >
   <ng-container *ngIf="login">
     <a
       *ngIf="admin"
